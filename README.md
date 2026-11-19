@@ -31,7 +31,7 @@ chosen. All three panels are produced by `evodyn run` on the shipped example.*
 
 ## Status
 
-**v0.1.0 — alpha, work in progress.** The analysis core (numbering, network,
+**v0.1.0 alpha, work in progress.** The analysis core (numbering, network,
 controls, tables, reporting) is implemented and tested, and reproduces the EGFR
 case study exactly. The stages that shell out to external tools, alignment
 retrieval, CD-HIT, plmc, EquilibraTor/GROMACS, pySCA, are implemented but have
