@@ -13,14 +13,14 @@ One configuration file, one command, two tables in canonical numbering.
 
 It is a generalisation of a single-protein study of the EGFR kinase domain
 ([EGFRAllostery](https://github.com/rkibler88/EGFRAllostery)), built so that the
-analysis can be run over many proteins rather than one — a case study turned
+analysis can be run over many proteins rather than one, a case study turned
 into a dataset generator.
 
 ![EVODYN controls](docs/controls_figure.png)
 
 *The reason the controls are built in rather than bolted on. (**a**) In the EGFR
 alignment, the top-coupled "distal" pairs sit at a median 11.4 Å Cα–Cα against
-24.3 Å for the rest — a sequence-separation filter does not control for spatial
+24.3 Å for the rest, a sequence-separation filter does not control for spatial
 proximity. (**b**) Against a sequence-separation null, co-evolving pairs show
 1.83-fold enrichment in correlated motion; against a distance-matched null the
 same pairs give 1.02-fold, with a bootstrap interval spanning 1.0. (**c**) The
@@ -33,8 +33,8 @@ chosen. All three panels are produced by `evodyn run` on the shipped example.*
 
 **v0.1.0 — alpha, work in progress.** The analysis core (numbering, network,
 controls, tables, reporting) is implemented and tested, and reproduces the EGFR
-case study exactly. The stages that shell out to external tools — alignment
-retrieval, CD-HIT, plmc, EquilibraTor/GROMACS, pySCA — are implemented but have
+case study exactly. The stages that shell out to external tools, alignment
+retrieval, CD-HIT, plmc, EquilibraTor/GROMACS, pySCA, are implemented but have
 so far been exercised only on the EGFR configuration and in dry-run form. See
 [docs/ROADMAP.md](docs/ROADMAP.md) for what is finished, what is untested and
 what is missing.
@@ -105,7 +105,7 @@ Four commitments, each of which exists because the EGFR study got bitten by its
 absence. [docs/DESIGN.md](docs/DESIGN.md) gives the longer version.
 
 1. **Controls are stages, not options.** Every enrichment is reported with its
-   matched nulls beside it — distance-matched, conservation-matched,
+   matched nulls beside it; distance-matched, conservation-matched,
    secondary-structure-matched. An unmatched enrichment is never reported
    alone, because the EGFR result that survived review and the one that did not
    differ only in which null was used.
