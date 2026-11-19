@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evodyn"
+version = "0.1.0"
+description = "Evolutionary, structural and dynamic dataset generation for protein allostery"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Ryan Kibler"}]
+keywords = ["allostery", "coevolution", "molecular dynamics", "protein networks"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+  "numpy>=1.24",
+  "pandas>=2.0",
+  "scipy>=1.10",
+  "networkx>=3.0",
+  "python-louvain>=0.16",
+  "biopython>=1.81",
+  "pyyaml>=6.0",
+  "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+dynamics = ["mdtraj>=1.9"]
+md = ["EquilibraTor"]
+ml = ["spheronizator"]
+dev = ["pytest>=7", "pytest-cov"]
+
+[project.scripts]
+evodyn = "evodyn.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/rkibler88/EVODYN"
+"Case study" = "https://github.com/rkibler88/EGFRAllostery"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+evodyn = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: regression against the committed EGFR benchmark"]

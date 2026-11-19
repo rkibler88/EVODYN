@@ -1,0 +1,68 @@
+# EVODYN from scratch: family alignment to dataset, molecular dynamics included.
+#
+# Everything here is computed by the run. Budget accordingly - the alignment and
+# the DCA stage are hours, and each MD replicate is a full GROMACS setup-to-
+# production run. `evodyn plan --config config.yaml` prints the exact
+# EquilibraTor invocation and checks the external tools before anything starts.
+
+target:
+  name: MY_PROTEIN
+  uniprot: Q00000
+  pfam: PF00000
+  reference_id: MYPROT_HUMAN/1-300
+  reference_start: 1
+  structure: structures/myprotein.pdb
+
+outdir: run_myprotein
+
+sequences:
+  source: pfam                  # downloaded from InterPro
+  cdhit_identity: 0.62
+  cdhit_word_size: 4            # must match the identity threshold
+  rescue_reference: true        # re-insert the reference if clustering drops it
+
+coevolution:
+  method: plmc
+  threads: 8
+  score_column: 6               # average-product-corrected, signed
+  run_sca: false                # set true if pySCA is installed
+
+network:
+  threshold: percolation        # derived, not chosen
+  louvain_seeds: 100
+
+dynamics:
+  mode: equilibrate             # EVODYN runs the MD, through EquilibraTor
+  replicates: 5
+  force_field: amber99sb-ildn
+  water_model: tip3p
+  box_type: cubic
+  box_distance: 1.2
+  pos_ion: NA
+  neg_ion: CL
+  ligands: []                   # EquilibraTor parameterises these with acpype
+  # To reuse a simulation you already have instead, set:
+  #   mode: trajectory
+  #   trajectory: md_clean.xtc
+  #   topology: md.gro
+
+structure:
+  pdb: structures/myprotein.pdb
+  contact_cutoff: 8.0
+  compute_dssp: true
+  sites:
+    orthosteric: []
+    allosteric: []
+
+controls:
+  distance_matched: true
+  conservation_matched: true
+  ss_matched: true
+  top_n_pairs: 500
+  seed: 0
+
+export:
+  per_residue: true
+  per_pair: true
+  spheronizator: false          # voxel export for downstream ML
+  interactor: false             # physics-based interaction features

@@ -1,0 +1,69 @@
+# EVODYN reference configuration: the EGFR kinase domain.
+#
+# This reproduces the case study the pipeline was generalised from
+# (github.com/rkibler88/EGFRAllostery) starting from its committed
+# intermediates, so the whole run completes in about a minute on a laptop and
+# needs no external binaries. It is the configuration `evodyn benchmark` uses.
+#
+# To run the same analysis from scratch on a new protein, see
+# examples/new_protein/config.yaml, which sets coevolution.couplings to null
+# and dynamics.mode to "equilibrate".
+
+target:
+  name: EGFR_kinase
+  uniprot: P00533
+  pfam: PF07714
+  reference_id: EGFR_HUMAN/712-968
+  reference_row: data/reference_aligned.fasta
+  reference_start: 712          # canonical number of the first residue in that row
+  region: [714, 966]            # 712, 713, 967 and 968 are insert-state columns
+  structure: data/egfr_clean.pdb
+
+outdir: run_egfr
+
+stages: [sequences, coevolution, network, dynamics, structure, controls, export]
+
+sequences:
+  # The 2.5 GB PF07714 full alignment is not shipped, so this run builds the
+  # numbering map and goes straight to the committed couplings. Set
+  # source: pfam to download and filter the alignment instead.
+  source: none
+  alignment: null
+  cdhit_identity: 0.62
+  cdhit_word_size: 4
+
+coevolution:
+  method: none
+  couplings: data/couplings_translated.csv.gz
+  couplings_format: translated
+
+network:
+  threshold: multiplier         # int(L_focus x 1.80) = 462, the deposited partition
+  multiplier: 1.80
+  louvain_seeds: 100
+  knockout_targets: [793, 858, 965, 884, 733, 717, 799, 851, 790, 745]
+
+dynamics:
+  mode: matrix                  # the deposited 253 x 253 DCCM, replicate 1
+  dccm_matrix: data/dccm_matrix.csv.gz
+  rmsf: data/rmsf.xvg
+
+structure:
+  pdb: data/egfr_clean.pdb
+  contact_cutoff: 8.0
+  compute_dssp: false
+
+controls:
+  distance_matched: true
+  conservation_matched: true    # needs the alignment; skipped silently when absent
+  sequence_separation: 5
+  top_n_pairs: 500
+  distance_bin_width: 2.0
+  n_draws: 200
+  n_bootstrap: 2000
+  seed: 20261013
+
+export:
+  per_residue: true
+  per_pair: true
+  compress: true

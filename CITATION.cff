@@ -1,0 +1,115 @@
+cff-version: 1.2.0
+title: "EVODYN: evolutionary, structural and dynamic datasets of protein allostery"
+message: "If you use this software, please cite it, and cite the tools it invokes (see references below)."
+type: software
+version: 0.1.0
+date-released: 2026-11-19
+authors:
+  - family-names: Kibler
+    given-names: Ryan
+    affiliation: "Department of Microbiology and Cell Science, University of Florida"
+  - family-names: Dias
+    given-names: Raquel
+    name-suffix: PhD
+    affiliation: "Department of Microbiology and Cell Science, University of Florida"
+license: MIT
+repository-code: "https://github.com/rkibler88/EVODYN"
+keywords:
+  - protein allostery
+  - coevolution
+  - molecular dynamics
+  - residue interaction networks
+  - reproducibility
+references:
+  - type: software
+    title: "Co-evolutionary community architecture of the EGFR kinase domain"
+    repository-code: "https://github.com/rkibler88/EGFRAllostery"
+    authors:
+      - family-names: Kibler
+        given-names: Ryan
+      - family-names: Dias
+        given-names: Raquel
+
+  # --- invoked by EVODYN; please cite if you use the corresponding stage ---
+  - type: article
+    title: "EquilibraTor streamlines molecular dynamics simulations in a single execution"
+    journal: "Computational and Structural Biotechnology Journal"
+    volume: 27
+    start: 5318
+    end: 5325
+    year: 2025
+    doi: "10.1016/j.csbj.2025.11.034"
+    notes: "Used by the dynamics stage (dynamics.mode: equilibrate)."
+    authors:
+      - family-names: Cediel-Becerra
+        given-names: "José D. D."
+      - family-names: Silva
+        given-names: "Jose Cleydson F."
+      - family-names: Dias
+        given-names: Raquel
+
+  - type: software
+    title: "Spheronizator"
+    repository-code: "https://github.com/Dias-Lab/spheronizator"
+    notes: "Optional voxel export adapter (export.spheronizator)."
+    authors:
+      - family-names: Richardson
+        given-names: Matthew
+      - family-names: Silva
+        given-names: "Jose Cleydson F."
+      - family-names: Cediel-Becerra
+        given-names: "José D. D."
+      - family-names: Dias
+        given-names: Raquel
+
+  - type: article
+    title: "InteracTor: Feature Engineering and Explainable AI for Profiling Protein Structure-Interaction-Function Relationships"
+    journal: bioRxiv
+    year: 2025
+    doi: "10.1101/2025.04.10.648139"
+    notes: "Optional interaction-feature export adapter (export.interactor)."
+    authors:
+      - family-names: Silva
+        given-names: "Jose Cleydson F."
+      - family-names: Schuster
+        given-names: Layla
+      - family-names: Sexson
+        given-names: Nick
+      - family-names: Erdem
+        given-names: Melissa
+      - family-names: Hulk
+        given-names: Ryan
+      - family-names: Kirst
+        given-names: Matias
+      - family-names: Resende
+        given-names: "Marcio F. R."
+      - family-names: Dias
+        given-names: Raquel
+
+  - type: article
+    title: "Mutation effects predicted from sequence co-variation"
+    journal: "Nature Biotechnology"
+    volume: 35
+    year: 2017
+    doi: "10.1038/nbt.3769"
+    notes: "plmc, used by the coevolution stage."
+    authors:
+      - family-names: Hopf
+        given-names: "Thomas A."
+      - family-names: Marks
+        given-names: "Debora S."
+
+  - type: article
+    title: "Evolution-based functional decomposition of proteins"
+    journal: "PLOS Computational Biology"
+    volume: 12
+    year: 2016
+    doi: "10.1371/journal.pcbi.1004817"
+    notes: "pySCA, used by the optional sector stage."
+    authors:
+      - family-names: Rivoire
+        given-names: Olivier
+      - family-names: Reynolds
+        given-names: "Kimberly A."
+      - family-names: Ranganathan
+        given-names: Rama

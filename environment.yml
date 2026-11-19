@@ -1,0 +1,23 @@
+name: evodyn
+channels: [conda-forge, bioconda]
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - networkx
+  - biopython
+  - pyyaml
+  - mdtraj
+  - pytest
+  # external stages. Uncomment the ones you need; none are required for
+  # `evodyn benchmark` or for the test suite.
+  # - cd-hit          # redundancy filtering          (bioconda)
+  # - gromacs         # molecular dynamics            (bioconda / local module)
+  # - dssp            # secondary structure           (salilab / bioconda)
+  - pip
+  - pip:
+      - python-louvain
+      # - EquilibraTor   # GROMACS setup-to-production driver
+      # - spheronizator  # voxel export for machine learning
